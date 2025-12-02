@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-family: "Urbanist", sans-serif;
+
+  --color-react-blue: #58c4dc;
+  --color-typescript-blue: #3178c6;
+  --color-nextjs-gray: #666666;
+  --color-redux-purple: #764abc;
+  --color-material-ui-blue: #0073e6;
+  --color-tailwind-cyan: #00bcff;
+
+  --color-nodejs-green: #417e38;
+  --color-express-gray: #666666;
+  --color-rest-apis-orange: #d97757;
+  --color-openai-gray: #666666;
+  --color-kafka-green: #5ca2a2;
+  --color-websockets-yellow: #ffd641;
+
+  --color-mongodb-green: #006749;
+  --color-mongoose-red: #880000;
+  --color-postgresql-indigo: #31648c;
+  --color-mysql-cyan: #0066cc;
+  --color-prisma-green: #16a394;
+
+  --color-git-gray: #666666;
+  --color-aws-orange: #ec7211;
+  --color-vercel-gray: #666666;
+  --color-docker-blue: #2560ff;
+  --color-terraform-purple: #7b42bc;
+
+  --color-jest-red: #94404d;
+  --color-cypress-green: #0097a8;
+  --color-postman-orange: #ff6c37;
+  --color-statsig-gray: #666666;
+  --color-storybook-rose: #ff4785;
+}
+
+@variant dark (.dark &);
+
+@theme {
+  --font-display: "Poppins", "sans-serif";
+  --breakpoint-3xl: 1920px;
+  --color-primary: #875cf5;
+
+  /* Facebook Light Mode Colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f0f2f5;
+  --color-text-primary: #050505;
+  --color-text-secondary: #65676b;
+  --color-border: #e4e6eb;
+  --color-hover: #f2f2f2;
+}
+
+/* Class-based dark mode overrides */
+.dark {
+  --color-bg-primary: #18191a;
+  --color-bg-secondary: #242526;
+  --color-text-primary: #e4e6eb;
+  --color-text-secondary: #b0b3b8;
+  --color-border: #3a3b3c;
+  --color-hover: #3a3b3c;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
