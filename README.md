@@ -1,5 +1,7 @@
 ## Developer Portfolio
 
+Live demo: [developer-portfolio-five-coral.vercel.app](https://developer-portfolio-five-coral.vercel.app/)
+
 Personal developer portfolio built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS v4**, featuring animated sections and a dark/light theme.
 
 ### Features
