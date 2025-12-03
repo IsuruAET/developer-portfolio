@@ -73,14 +73,35 @@ const ContactSection = () => {
 
     setIsSubmitting(true);
     try {
-      // Simulate API call with 2 second delay
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          // Optional extras for nicer emails
+          subject: "New contact from portfolio site",
+          from_name: formData.name,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || data.success === false) {
+        throw new Error(data.message || "Failed to send email");
+      }
 
       setShowSuccess(true);
       setFormData({ name: "", email: "", message: "" });
       setErrors({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error sending email:", error);
+      // You could add error state here to show user-friendly error messages
     } finally {
       setIsSubmitting(false);
     }

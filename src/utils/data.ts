@@ -13,7 +13,7 @@ import {
   TestTubes,
   Zap,
 } from "lucide-react";
-import ianacareBanner from "../assets/images/ianacare-banner.png";
+// import ianacareBanner from "../assets/images/ianacare-banner.png";
 import incentivioBanner from "../assets/images/incentivio-admin-portal-banner.png";
 import klarnaBanner from "../assets/images/klarna-app-banner.png";
 import surroundInsuranceBanner from "../assets/images/surround-insurance-banner.png";
@@ -124,18 +124,18 @@ export const STATS = [
 ];
 
 export const PROJECTS = [
-  {
-    id: 1,
-    title: "Ianacare Web Portal",
-    description:
-      "A supportive caregiving platform offering coordinated care tools, shared tasks, resources, and communication features to simplify managing and organizing family caregiving responsibilities.",
-    image: ianacareBanner,
-    tags: ["React", "JavaScript", "MUI", "Redux Saga"],
-    liveUrl: "https://app.ianacare.com/",
-    githubUrl: "#",
-    featured: true,
-    category: "Web Development",
-  },
+  // {
+  //   id: 1,
+  //   title: "Ianacare Web Portal",
+  //   description:
+  //     "A supportive caregiving platform offering coordinated care tools, shared tasks, resources, and communication features to simplify managing and organizing family caregiving responsibilities.",
+  //   image: ianacareBanner,
+  //   tags: ["React", "JavaScript", "MUI", "Redux Saga"],
+  //   liveUrl: "https://app.ianacare.com/",
+  //   githubUrl: "#",
+  //   featured: true,
+  //   category: "Web Development",
+  // },
   {
     id: 2,
     title: "Incentivio Web Admin Portal",
