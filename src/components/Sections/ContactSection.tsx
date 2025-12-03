@@ -5,9 +5,19 @@ import TextInput from "../Input/TextInput";
 import { Send } from "lucide-react";
 import SuccessModal from "../SuccessModal";
 import { CONTACT_INFO, SOCIAL_LINKS } from "../../utils/data";
+import {
+  validateName,
+  validateEmail,
+  validateMessage,
+} from "../../utils/validator";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({
     name: "",
     email: "",
     message: "",
@@ -24,10 +34,43 @@ const ContactSection = () => {
   const y = useTransform(scrollY, [0, 500], [100, -100]);
 
   const handleChange = (field: string) => (value: string) => {
+    // Filter name input to only allow letters, numbers, and spaces
+    if (field === "name") {
+      value = value.replace(/[^a-zA-Z0-9\s]/g, "");
+    }
+
     setFormData({ ...formData, [field]: value });
+
+    // Validate on change
+    let error = "";
+    if (field === "name") {
+      error = validateName(value);
+    } else if (field === "email") {
+      error = validateEmail(value);
+    } else if (field === "message") {
+      error = validateMessage(value);
+    }
+
+    setErrors({ ...errors, [field]: error });
   };
 
   const handleSubmit = async () => {
+    // Validate all fields
+    const nameError = validateName(formData.name);
+    const emailError = validateEmail(formData.email);
+    const messageError = validateMessage(formData.message);
+
+    setErrors({
+      name: nameError,
+      email: emailError,
+      message: messageError,
+    });
+
+    // Don't submit if there are errors
+    if (nameError || emailError || messageError) {
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       // Simulate API call with 2 second delay
@@ -35,6 +78,7 @@ const ContactSection = () => {
 
       setShowSuccess(true);
       setFormData({ name: "", email: "", message: "" });
+      setErrors({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error sending email:", error);
     } finally {
@@ -111,6 +155,7 @@ const ContactSection = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange("name")}
+                    error={errors.name}
                   />
 
                   <TextInput
@@ -118,6 +163,7 @@ const ContactSection = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange("email")}
+                    error={errors.email}
                   />
                 </div>
 
@@ -127,6 +173,8 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={handleChange("message")}
                   textarea={true}
+                  error={errors.message}
+                  maxLength={1500}
                 />
 
                 <motion.button
@@ -252,6 +300,7 @@ const ContactSection = () => {
               whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="px-6 py-3 rounded-full border font-medium transition-all duration-300 border-gray-300 dark:border-gray-600 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer"
+              onClick={() => (window.location.href = "tel:+61467690467")}
             >
               Schedule a Call
             </motion.button>
