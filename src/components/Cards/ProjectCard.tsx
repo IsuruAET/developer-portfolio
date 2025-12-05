@@ -46,39 +46,45 @@ const ProjectCard = ({ project }: { project: Project }) => {
             </span>
           </div>
 
-          {/* Hover Overlay with CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center space-x-4"
-          >
-            <motion.a
-              href={project.liveUrl}
-              initial={{ y: 20, opacity: 0.5 }}
-              whileHover={{ y: 0, opacity: 1, scale: 1.05 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-full flex items-center space-x-2 text-sm font-medium transition-colors"
+          {/* Hover Overlay with CTA Buttons - Desktop Only */}
+          {(project.liveUrl || project.githubUrl) && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileHover={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="hidden md:flex absolute inset-0 bg-black/60 backdrop-blur-sm items-center justify-center space-x-4"
             >
-              <ExternalLink size={16} />
-              <span>Live Demo</span>
-            </motion.a>
+              {project.liveUrl && (
+                <motion.a
+                  href={project.liveUrl}
+                  initial={{ y: 20, opacity: 0.5 }}
+                  whileHover={{ y: 0, opacity: 1, scale: 1.05 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-full flex items-center space-x-2 text-sm font-medium transition-colors"
+                >
+                  <ExternalLink size={16} />
+                  <span>Live Demo</span>
+                </motion.a>
+              )}
 
-            <motion.a
-              href={project.githubUrl}
-              initial={{ y: 20, opacity: 0.5 }}
-              whileHover={{ y: 0, opacity: 1, scale: 1.05 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-4 py-2 rounded-full flex items-center space-x-2 text-sm font-medium transition-all"
-            >
-              <FiGithub size={16} />
-              <span>View Code</span>
-            </motion.a>
-          </motion.div>
+              {project.githubUrl && (
+                <motion.a
+                  href={project.githubUrl}
+                  initial={{ y: 20, opacity: 0.5 }}
+                  whileHover={{ y: 0, opacity: 1, scale: 1.05 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-4 py-2 rounded-full flex items-center space-x-2 text-sm font-medium transition-all"
+                >
+                  <FiGithub size={16} />
+                  <span>View Code</span>
+                </motion.a>
+              )}
+            </motion.div>
+          )}
         </div>
 
         {/* Project Content */}
@@ -92,7 +98,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
           </p>
 
           {/* Tech Stack Tags */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mb-4">
             {project.tags.map((tag, tagIndex) => (
               <span
                 key={tagIndex}
@@ -102,6 +108,35 @@ const ProjectCard = ({ project }: { project: Project }) => {
               </span>
             ))}
           </div>
+
+          {/* Mobile CTA Buttons */}
+          {(project.liveUrl || project.githubUrl) && (
+            <div className="flex flex-col sm:flex-row gap-3 md:hidden pt-2 border-t border-gray-200 dark:border-gray-800">
+              {project.liveUrl && (
+                <motion.a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2.5 rounded-full flex items-center justify-center space-x-2 text-sm font-medium transition-colors active:scale-95"
+                >
+                  <ExternalLink size={16} />
+                  <span>Live Demo</span>
+                </motion.a>
+              )}
+
+              {project.githubUrl && (
+                <motion.a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2.5 rounded-full flex items-center justify-center space-x-2 text-sm font-medium transition-all active:scale-95"
+                >
+                  <FiGithub size={16} />
+                  <span>View Code</span>
+                </motion.a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
